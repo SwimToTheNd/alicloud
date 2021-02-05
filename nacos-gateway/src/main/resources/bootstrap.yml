@@ -1,0 +1,44 @@
+server:
+  port: 8866
+spring:
+  application:
+    name: nacos-gateway
+  cloud:
+    nacos:
+      config:
+        server-addr: 127.0.0.1:8848
+        file-extension: yaml
+        group: alicloud
+        namespace: 085bf34e-9a2a-4ab1-b885-b62a64d496d0
+        extension-configs:
+          - dataId: gateway-router.properties
+            group: alicloud
+            refresh: true
+      discovery:
+        group: alicloud
+        server-addr: 127.0.0.1:8848
+        namespace: 085bf34e-9a2a-4ab1-b885-b62a64d496d0
+    sentinel:
+      transport:
+        dashboard: 127.0.0.1:8888 #sentinel控制台的请求地址
+    gateway:
+      discovery:
+        locator:
+          enabled: true #开启服务发现与网关的集成，并且spring cloud gateway自动根据服务发现为每一个服务创建了一个router，这个router将以服务名开头的请求路径转发到对应的服务
+          lower-case-service-id: true # 将服务名转换为小写，eureka会自动将服务转换为大小。服务名MY-SERVICE会匹配/my-service/**
+      routes:
+        - id: rewrite-path-route
+          uri: lb://service-consumer  #在uri的schema协议部分为自定义的lb:类型，表示从微服务注册中心订阅服务，并且进行服务的路由
+          predicates:
+            - Path=/api/**
+          filters:
+            - RewritePath=/api, /
+logging:
+  level:
+    root: info
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: gateway
