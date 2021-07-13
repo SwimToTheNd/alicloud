@@ -30,7 +30,7 @@ public class PartFilterGatewayFilterFactory extends AbstractGatewayFilterFactory
     /**
      * 局部过滤器
      */
-    public class UserIdCheckGatewayFilter implements GatewayFilter, Ordered {
+    public static class UserIdCheckGatewayFilter implements GatewayFilter, Ordered {
 
         @Override
         public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
