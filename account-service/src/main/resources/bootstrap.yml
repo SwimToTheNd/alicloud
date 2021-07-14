@@ -1,0 +1,34 @@
+server:
+  port: 8898
+
+spring:
+  application:
+    name: account-service
+  cloud:
+    nacos:
+      config:
+        server-addr: 127.0.0.1:8848
+        file-extension: yaml
+        group: alicloud
+        namespace: 085bf34e-9a2a-4ab1-b885-b62a64d496d0
+      discovery:
+        group: alicloud
+        server-addr: 127.0.0.1:8848
+        namespace: 085bf34e-9a2a-4ab1-b885-b62a64d496d0
+    sentinel:
+      transport:
+        dashboard: 127.0.0.1:8888 #sentinel控制台的请求地址
+    alibaba:
+      seata:
+        tx-service-group: test_tx_group  # 定义事务组的名称
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/seata_demo?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&useSSL=false
+    username: root
+    password: 123456
+mybatis-plus:
+  global-config:
+    db-config:
+      insert-strategy: not_null
+      update-strategy: not_null
+      id-type: auto

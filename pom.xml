@@ -7,6 +7,9 @@
         <module>service-provider</module>
         <module>service-consumer</module>
         <module>nacos-gateway</module>
+        <module>account-service</module>
+        <module>storage-service</module>
+        <module>order-service</module>
     </modules>
 
     <parent>
@@ -72,6 +75,11 @@
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-seata</artifactId>
         </dependency>
 
         <dependency>
